@@ -13,9 +13,9 @@ class TodoItem(models.Model):
         return self.topic
 
 
-def get_current_user():
+# def get_current_user():
    
-    return User.objects.get(username='admin')
+#     return User.objects.get(username='admin')
 
 class TodoItem(models.Model):
     description = models.CharField(max_length=200)
