@@ -2,23 +2,27 @@
 <html>
 <head>
     <title>Todo List</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
 </head>
 <body>
-    <h1>Todo List</h1>
-    <ul>
-        {% for todo_item in todo_items %}
-            <li>
-                <strong>{{ todo_item.topic }}</strong><br>
-                Description: {{ todo_item.description }}<br>
-                Status: {% if todo_item.done %}Done{% else %}Not Done{% endif %}
-                <form action="{% url 'delete_todo_item' todo_item.id %}" method="post" style="display: inline;">
-                    {% csrf_token %}
-                    <button type="submit">Delete</button>
-                </form>
-            </li>
-        {% endfor %}
-    </ul>
-
-    <a href="{% url 'add_todo_item' %}">Add Todo</a>
+    <div class="container justify-content-center">
+        <h1 class="mt-4 bg-dark text-light p-3">Todo List</h1>
+        <ul class="list-group mt-4">
+            {% for todo_item in todo_items %}
+                <li class="list-group-item">
+                    <strong>{{ todo_item.topic }}</strong><br>
+                    Description: {{ todo_item.description }}<br>
+                    Status: <span class="badge {% if todo_item.done %}badge-success{% else %}badge-warning{% endif %}">
+                        {% if todo_item.done %}Done{% else %}Not Done{% endif %}
+                    </span>
+                    <form action="{% url 'delete_todo_item' todo_item.id %}" method="post" style="display: inline;">
+                        {% csrf_token %}
+                        <button type="submit" class="btn btn-danger btn-sm float-right">Delete</button>
+                    </form>
+                </li>
+            {% endfor %}
+        </ul>
+        <a href="{% url 'add_todo_item' %}" class="btn btn-success mt-4">ADD newOne</a>
+    </div>
 </body>
 </html>
