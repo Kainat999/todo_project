@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Todo List</title>
+</head>
+<body>
+    <h1>Todo List</h1>
+    <ul>
+        {% for todo_item in todo_items %}
+            <li>
+                <strong>{{ todo_item.topic }}</strong><br>
+                Description: {{ todo_item.description }}<br>
+                Status: {% if todo_item.done %}Done{% else %}Not Done{% endif %}
+                <form action="{% url 'delete_todo_item' todo_item.id %}" method="post" style="display: inline;">
+                    {% csrf_token %}
+                    <button type="submit">Delete</button>
+                </form>
+            </li>
+        {% endfor %}
+    </ul>
+
+    <a href="{% url 'add_todo_item' %}">Add Todo</a>
+</body>
+</html>
